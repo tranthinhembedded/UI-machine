@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ui-machine"
+version = "0.1.0"
+description = "Lightweight Qt Widgets HMI for TNM Vision"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = { text = "Proprietary" }
+authors = [{ name = "Duc Thinh Tran" }]
+dependencies = ["PySide6-Essentials>=6.7,<7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1"]
+
+[project.scripts]
+ui-machine = "ui_machine.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
