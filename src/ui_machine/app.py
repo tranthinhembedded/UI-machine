@@ -127,7 +127,7 @@ QScrollBar:vertical {{
 }}
 QScrollBar::handle:vertical {{ background: #526970; min-height: 28px; border-radius: 3px; }}
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
-QSplitter::handle {{ background: transparent; width: 10px; }}
+QSplitter::handle {{ background: {CANVAS}; }}
 """
 
 
@@ -273,6 +273,7 @@ class RuntimeWindow(QMainWindow):
 
         splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.setChildrenCollapsible(False)
+        splitter.setHandleWidth(12)
         splitter.addWidget(self._build_monitor())
         inspector = self._build_inspector()
         inspector.setMinimumWidth(340)
