@@ -27,89 +27,106 @@ from PySide6.QtWidgets import (
 
 from ui_machine.runtime import DemoRuntime, HttpRuntime, RuntimePort
 
-INK = "#17262B"
-MUTED = "#5E7075"
-LINE = "#C9D1D3"
-CANVAS = "#E9EDEE"
-SURFACE = "#F9FAFA"
-WELL = "#15252A"
-TEAL = "#007E87"
-RED = "#A12E33"
+INK = "#EDF4F5"
+MUTED = "#A7B8BD"
+LINE = "#40575F"
+CANVAS = "#0E181C"
+SURFACE = "#17262C"
+WELL = "#081419"
+TEAL = "#14B8B4"
+RED = "#E05257"
 
 STYLE = f"""
-* {{ font-family: "Segoe UI", "Noto Sans", sans-serif; color: {INK}; }}
+* {{ color: {INK}; }}
 QMainWindow, QWidget#root {{ background: {CANVAS}; }}
-QFrame#header {{ background: {WELL}; border: none; }}
-QLabel#brandMark {{
-  background: {TEAL}; color: white; border: 1px solid #66ADB2;
-  border-radius: 4px; font-size: 17px; font-weight: 700;
-}}
-QLabel#brandName {{ color: white; font-size: 17px; font-weight: 650; }}
-QLabel#brandSub, QLabel#headerMeta {{ color: #B8C5C8; font-size: 12px; }}
-QLabel#pageTitle {{ font-size: 25px; font-weight: 650; }}
-QLabel#pageSub, QLabel[class="muted"] {{ color: {MUTED}; font-size: 13px; }}
+QFrame#header {{ background: #101D22; border: none; border-bottom: 1px solid {LINE}; }}
+QLabel#brandLogo {{ background: transparent; border: none; }}
+QLabel#brandName {{ color: white; font-size: 18px; font-weight: 700; }}
+QLabel#brandSub, QLabel#headerMeta {{ color: #B6C5C9; font-size: 12px; }}
+QLabel#pageTitle {{ color: white; font-size: 22px; font-weight: 650; }}
+QLabel#pageSub, QLabel[class="muted"] {{ color: {MUTED}; font-size: 12px; }}
 QFrame[class="card"], QFrame#controls {{
-  background: {SURFACE}; border: 1px solid {LINE}; border-radius: 5px;
+  background: {SURFACE}; border: 1px solid {LINE}; border-radius: 4px;
 }}
-QLabel[class="sectionTitle"] {{ font-size: 15px; font-weight: 650; }}
-QLabel[class="fieldLabel"] {{ font-size: 12px; font-weight: 600; }}
+QLabel[class="sectionTitle"] {{ color: #F4F8F8; font-size: 15px; font-weight: 650; }}
+QLabel[class="fieldLabel"] {{ color: #D5E0E2; font-size: 12px; font-weight: 600; }}
 QComboBox {{
-  background: white; border: 1px solid #AEBABD; border-radius: 4px;
-  min-height: 40px; padding: 0 12px; font-size: 13px;
+  background: #1D3037; color: white; border: 1px solid #60757C; border-radius: 3px;
+  min-height: 42px; padding: 0 12px; font-size: 13px;
 }}
+QComboBox:hover {{ border-color: #82979E; }}
 QComboBox:focus, QPushButton:focus {{ border: 2px solid {TEAL}; }}
-QPushButton {{
-  background: #F4F6F6; border: 1px solid #AEBABD; border-radius: 4px;
-  min-height: 40px; padding: 0 16px; font-size: 13px; font-weight: 600;
+QComboBox::drop-down {{ border: none; width: 28px; }}
+QComboBox QAbstractItemView {{
+  background: #1D3037; color: white; border: 1px solid #60757C;
+  selection-background-color: #0D6264; selection-color: white;
 }}
-QPushButton:hover {{ background: #E8EDEE; border-color: #87989C; }}
-QPushButton:pressed {{ background: #DCE3E4; }}
-QPushButton:disabled {{ color: #929EA1; background: #EEF1F1; border-color: #D4DADB; }}
-QPushButton#startButton {{ background: {TEAL}; color: white; border-color: #005E65; }}
-QPushButton#startButton:hover {{ background: #005E65; }}
-QPushButton#stopButton {{ background: white; color: {RED}; border-color: #C58B8E; }}
+QPushButton {{
+  background: #24373E; color: #F3F7F8; border: 1px solid #61767D; border-radius: 3px;
+  min-height: 42px; padding: 0 18px; font-size: 13px; font-weight: 650;
+}}
+QPushButton:hover {{ background: #30474F; border-color: #81969D; }}
+QPushButton:pressed {{ background: #15262C; }}
+QPushButton:disabled {{ color: #73858A; background: #1A292E; border-color: #35494F; }}
+QPushButton#startButton {{ background: #087F7D; color: white; border-color: {TEAL}; }}
+QPushButton#startButton:hover {{ background: #0A9491; }}
+QPushButton#startButton:disabled {{ background: #284B4C; color: #82999B; border-color: #375E60; }}
+QPushButton#stopButton {{ background: #5A292D; color: #FFDADB; border-color: #A94B50; }}
+QPushButton#stopButton:hover {{ background: #743238; border-color: {RED}; }}
+QPushButton#stopButton:disabled {{ background: #2B2528; color: #76676A; border-color: #4A3B3E; }}
 QPushButton#headerButton {{
-  background: #23383E; color: white; border-color: #60777C;
-  min-height: 34px; padding: 0 12px;
+  background: #1B2D33; color: white; border-color: #60777C;
+  min-height: 36px; padding: 0 14px;
 }}
 QLabel#imageWell, QLabel#contextWell {{
   background: {WELL}; color: #D6E0E2; border: none;
 }}
 QLabel#cropWell {{
-  background: #E8ECEC; color: {MUTED}; border: 1px solid {LINE};
+  background: #24373D; color: {MUTED}; border: 1px solid {LINE};
 }}
 QLabel[class="statLabel"] {{ color: {MUTED}; font-size: 11px; }}
-QLabel[class="statValue"] {{ font-size: 23px; font-weight: 600; }}
+QLabel[class="statValue"] {{ color: white; font-size: 24px; font-weight: 650; }}
 QLabel#message {{
-  background: white; border: 1px solid {LINE}; border-left: 4px solid {TEAL};
-  border-radius: 4px; padding: 10px 12px; font-size: 13px;
+  background: #17272D; color: #E7EFF0; border: 1px solid {LINE};
+  border-left: 4px solid {TEAL}; border-radius: 3px;
+  padding: 10px 12px; font-size: 13px;
 }}
 QLabel#message[tone="bad"] {{
-  color: {RED}; border-left-color: {RED}; background: #FFF9F9;
+  color: #FFD2D4; border-left-color: {RED}; background: #352225;
 }}
 QLabel[class="badge"] {{
-  border-radius: 4px; padding: 4px 8px; font-size: 11px; font-weight: 650;
+  border-radius: 3px; padding: 5px 9px; font-size: 11px; font-weight: 650;
 }}
 QLabel[class="badge"][tone="neutral"] {{
-  color: #405156; background: #E9EDEE; border: 1px solid #C7D0D2;
+  color: #C2CED1; background: #24363C; border: 1px solid #536970;
 }}
 QLabel[class="badge"][tone="good"] {{
-  color: #236A4B; background: #E5F0E9; border: 1px solid #AAC9B8;
+  color: #8DF2A9; background: #153D2C; border: 1px solid #368A58;
 }}
 QLabel[class="badge"][tone="warn"] {{
-  color: #8C5A12; background: #F5EBD7; border: 1px solid #D6BF95;
+  color: #FFD07B; background: #493716; border: 1px solid #9A7228;
 }}
 QLabel[class="badge"][tone="bad"] {{
-  color: {RED}; background: #F6E3E4; border: 1px solid #D4A1A4;
+  color: #FFB4B8; background: #4A2529; border: 1px solid #A64B51;
 }}
-QListWidget {{ background: {SURFACE}; border: none; outline: none; padding: 4px; }}
+QLabel#operationState {{
+  min-width: 190px; min-height: 42px; font-size: 16px; font-weight: 700;
+}}
+QListWidget {{
+  background: {SURFACE}; color: #E9F0F1; border: none; outline: none; padding: 4px;
+}}
 QListWidget::item {{
-  border: 1px solid transparent; border-radius: 3px;
-  padding: 8px 10px; min-height: 44px;
+  border: 1px solid transparent; border-bottom-color: #31474E;
+  border-radius: 2px; padding: 8px 10px; min-height: 44px;
 }}
 QListWidget::item:selected {{
-  color: {INK}; background: #E2F1F2; border-color: {TEAL};
+  color: white; background: #0D5558; border: 1px solid {TEAL};
 }}
+QScrollBar:vertical {{
+  background: #132329; width: 12px; margin: 0;
+}}
+QScrollBar::handle:vertical {{ background: #526970; min-height: 28px; border-radius: 3px; }}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{ height: 0; }}
 QSplitter::handle {{ background: transparent; width: 10px; }}
 """
 
@@ -250,9 +267,8 @@ class RuntimeWindow(QMainWindow):
 
         body = QWidget()
         layout = QVBoxLayout(body)
-        layout.setContentsMargins(22, 16, 22, 12)
+        layout.setContentsMargins(14, 12, 14, 10)
         layout.setSpacing(12)
-        layout.addLayout(self._build_title())
         layout.addWidget(self._build_controls())
 
         splitter = QSplitter(Qt.Orientation.Horizontal)
@@ -301,6 +317,21 @@ class RuntimeWindow(QMainWindow):
         names.addWidget(QLabel("TNM Vision", objectName="brandName"))
         names.addWidget(QLabel("Kiểm tra bề mặt vải", objectName="brandSub"))
         layout.addLayout(names)
+        rule = QFrame()
+        rule.setFrameShape(QFrame.Shape.VLine)
+        rule.setStyleSheet("color: #4A6067;")
+        rule.setFixedHeight(42)
+        layout.addWidget(rule)
+        headline = QVBoxLayout()
+        headline.setSpacing(1)
+        headline.addWidget(QLabel("Kiểm tra trực tiếp", objectName="pageTitle"))
+        headline.addWidget(
+            QLabel(
+                "Quan sát bề mặt vải và đối chiếu vùng nghi ngờ trong cùng một màn hình.",
+                objectName="pageSub",
+            )
+        )
+        layout.addLayout(headline)
         layout.addStretch(1)
         layout.addWidget(QLabel("Trạm kiểm tra / 01", objectName="headerMeta"))
         layout.addWidget(
@@ -354,12 +385,9 @@ class RuntimeWindow(QMainWindow):
         layout.addWidget(self.start_button, alignment=Qt.AlignmentFlag.AlignBottom)
         layout.addWidget(self.stop_button, alignment=Qt.AlignmentFlag.AlignBottom)
         layout.addStretch(1)
-        note = text_label(
-            "Dừng kiểm tra chỉ dừng phần mềm xử lý ảnh.\nKhông điều khiển chuyển động của máy.",
-            "muted",
-        )
-        note.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        layout.addWidget(note)
+        self.control_status = StatusBadge("Chưa chạy")
+        self.control_status.setObjectName("operationState")
+        layout.addWidget(self.control_status, alignment=Qt.AlignmentFlag.AlignBottom)
         return controls
 
     def _build_monitor(self) -> QWidget:
@@ -370,7 +398,7 @@ class RuntimeWindow(QMainWindow):
 
         frame, layout = make_card()
         self.run_badge = StatusBadge("Chưa chạy")
-        layout.addWidget(section_header("Khung detect runtime", self.run_badge))
+        layout.addWidget(section_header("Khung camera", self.run_badge))
         layout.addWidget(separator())
         self.frame_view = ImageView(
             "imageWell",
@@ -532,6 +560,7 @@ class RuntimeWindow(QMainWindow):
         else:
             status, tone = self.state_names[state["state"]], "neutral"
         self.run_badge.set_status(status, tone)
+        self.control_status.set_status(status, tone)
 
         self.fps_value.setText(f"{state['fps']:.1f}" if state["processed"] > 1 else "—")
         self.latency_value.setText(
