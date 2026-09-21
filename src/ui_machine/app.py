@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from importlib.resources import files
 from pathlib import Path
 
 from PySide6.QtCore import QByteArray, QSize, Qt, QTimer
@@ -280,9 +281,20 @@ class RuntimeWindow(QMainWindow):
         layout.setContentsMargins(22, 9, 22, 9)
         layout.setSpacing(11)
 
-        mark = QLabel("TN", objectName="brandMark")
+        mark = QLabel(objectName="brandLogo")
+        logo_path = files("ui_machine").joinpath("assets/logo.png")
+        logo = QPixmap(str(logo_path))
+        mark.setPixmap(
+            logo.scaled(
+                46,
+                46,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+        )
         mark.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        mark.setFixedSize(42, 42)
+        mark.setAccessibleName("TNM logo")
+        mark.setFixedSize(46, 46)
         layout.addWidget(mark)
         names = QVBoxLayout()
         names.setSpacing(1)
