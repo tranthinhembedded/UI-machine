@@ -43,13 +43,13 @@ qt_add_executable(untitled
     visionruntime.cpp
     visionruntime.h
     resources.qrc
-    pp7_camera_cpp/src/pp7_detector.cpp
-    pp7_camera_cpp/src/pp7_fast_detector.cpp
+    ../algorithm/src/aglo_detector.cpp
+    ../algorithm/src/aglo_fast_detector.cpp
 )
 
 target_include_directories(untitled PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${CMAKE_CURRENT_SOURCE_DIR}/pp7_camera_cpp/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/algorithm/include"
     "${MVS_INCLUDE_DIR}"
     ${OpenCV_INCLUDE_DIRS}
 )
