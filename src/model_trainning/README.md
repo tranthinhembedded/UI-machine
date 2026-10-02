@@ -32,17 +32,8 @@ Kết quả cho thấy mô hình nhận diện lớp `yarn defect` tốt hơn l�
 
 ![Kết quả phát hiện lỗ thủng](images/detected.jpg)
 
-Ảnh `detected.jpg` minh họa kết quả suy luận của mô hình trên một mẫu vải. Mô hình phát hiện **6 vùng khuyết tật** thuộc lớp `hole`, với độ tin cậy lần lượt là:
-
-- 0,80
-- 0,80
-- 0,77
-- 0,72
-- 0,71
-- 0,43
-
-Mỗi khung màu xanh biểu diễn vị trí mà mô hình cho là có lỗ thủng. Con số bên cạnh nhãn `hole` là **độ tin cậy của riêng dự đoán đó**, không phải độ chính xác tổng thể của mô hình. Dự đoán có confidence **0,43** là trường hợp ít chắc chắn nhất và nên được xem xét khi lựa chọn ngưỡng confidence để triển khai thực tế.
+Ảnh `detected.jpg` minh họa kết quả suy luận của mô hình trên một mẫu vải. Mô hình phát hiện **6 vùng khuyết tật** thuộc lớp `hole` ở trong điều kiện ánh sáng cho phép.
 
 ## Nhận xét
 
-YOLOv8m tạo sự cân bằng giữa độ chính xác và tốc độ, phù hợp với bài toán kiểm tra lỗi vải bằng thị giác máy tính. Để cải thiện mô hình, có thể bổ sung dữ liệu cho lớp `hole`, tăng số mẫu khó và mẫu có kích thước khuyết tật nhỏ, đồng thời thử điều chỉnh ngưỡng confidence dựa trên yêu cầu bỏ sót hoặc cảnh báo nhầm của hệ thống thực tế.
+Model đạt được mục tiêu nhận diện ban đầu, do đây chỉ là demo trên mô hình chưa ra máy thuật nên điều khiện ánh sáng ở các phần tối chưa được tốt để nhận diện.
